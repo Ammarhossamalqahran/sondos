@@ -9,10 +9,12 @@
     
     <style>
         :root {
-            --primary-color: #d4af37;
-            --bg-color: #0f0f0f;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --neon-glow: 0 0 10px #d4af37;
+            /* درجات البني الداكن والأسود */
+            --primary-color: #a6673a; /* بني نحاسي/شوكولاتة */
+            --bg-color: #0a0705; /* أسود مائل للبني الداكن جداً */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --neon-glow: 0 0 10px rgba(166, 103, 58, 0.6);
+            --text-color: #d1bfae; /* بيج غامق للقراءة */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
@@ -25,13 +27,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            background-image: radial-gradient(circle at 50% 50%, rgba(166, 103, 58, 0.15) 0%, transparent 70%);
         }
 
         /* شاشة البداية (Start Overlay) */
         #start-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 3000;
+            background: #050302; z-index: 3000;
             display: flex; justify-content: center; align-items: center; flex-direction: column;
             cursor: pointer;
         }
@@ -40,7 +42,7 @@
             padding: 15px 40px; border: 2px solid var(--primary-color);
             background: transparent; color: var(--primary-color);
             font-size: 1.5rem; border-radius: 50px; cursor: pointer;
-            box-shadow: 0 0 20px var(--primary-color);
+            box-shadow: var(--neon-glow);
             animation: pulse 2s infinite;
         }
 
@@ -55,21 +57,21 @@
         #login-screen {
             display: none; 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 2000;
+            background: #050302; z-index: 2000;
             flex-direction: column; justify-content: center; align-items: center;
         }
 
         .input-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(166, 103, 58, 0.05);
             border: 2px solid var(--primary-color);
             padding: 10px 20px; border-radius: 30px;
-            color: #fff; text-align: center; font-size: 1.2rem;
+            color: var(--text-color); text-align: center; font-size: 1.2rem;
             outline: none; width: 80%; max-width: 300px;
             box-shadow: var(--neon-glow); margin-top: 20px;
         }
         
         .hint-text {
-            margin-top: 15px; color: #888; font-size: 0.9rem;
+            margin-top: 15px; color: #7a6352; font-size: 0.9rem;
             animation: fadeIn 2s ease-in;
         }
 
@@ -77,8 +79,8 @@
         .music-fix-btn {
             margin-top: 20px;
             background: transparent;
-            border: 1px dashed #555;
-            color: #555;
+            border: 1px dashed #5a4030;
+            color: #5a4030;
             padding: 5px 15px;
             border-radius: 20px;
             cursor: pointer;
@@ -103,7 +105,7 @@
 
         .photo-card {
             background: var(--glass-bg); padding: 10px; border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.1); width: 45%; min-width: 150px;
+            border: 1px solid rgba(166, 103, 58, 0.2); width: 45%; min-width: 150px;
             animation: float 4s ease-in-out infinite;
         }
         .photo-card:nth-child(2) { animation-delay: 1s; }
@@ -116,14 +118,14 @@
         .caption { margin-top: 10px; font-size: 0.9rem; font-weight: bold; color: var(--primary-color); }
 
         .message-box {
-            background: var(--glass-bg); backdrop-filter: blur(10px);
+            background: rgba(10, 7, 5, 0.7); backdrop-filter: blur(10px);
             border: 1px solid var(--primary-color); border-radius: 20px;
             padding: 20px; margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             max-height: 400px; overflow-y: auto; text-align: center;
         }
         .message-box h2 { color: var(--primary-color); margin-bottom: 15px; }
-        .message-box p { line-height: 1.8; color: #e0e0e0; margin-bottom: 10px; font-size: 1.05rem; }
+        .message-box p { line-height: 1.8; color: var(--text-color); margin-bottom: 10px; font-size: 1.05rem; }
 
         .timer-box {
             background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px;
@@ -132,19 +134,20 @@
         }
         .time-unit { display: flex; flex-direction: column; align-items: center; }
         .time-val { font-family: 'Share Tech Mono', monospace; font-size: 1.5rem; color: var(--primary-color); font-weight: bold; }
-        .time-label { font-size: 0.8rem; color: #888; }
+        .time-label { font-size: 0.8rem; color: #7a6352; }
 
         .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 50px; }
         .btn { padding: 12px 30px; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-yes { background: var(--primary-color); color: #000; box-shadow: 0 0 15px var(--primary-color); }
+        .btn-yes { background: var(--primary-color); color: #1a0f0a; box-shadow: var(--neon-glow); }
         .btn-yes:hover { transform: scale(1.1); }
-        .btn-no { background: transparent; border: 2px solid #ff4d4d; color: #ff4d4d; position: relative; }
+        .btn-no { background: transparent; border: 2px solid #8b3a3a; color: #8b3a3a; position: relative; }
 
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 10px var(--primary-color); } 50% { transform: scale(1.05); box-shadow: 0 0 25px var(--primary-color); } 100% { transform: scale(1); box-shadow: 0 0 10px var(--primary-color); } }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 10px rgba(166, 103, 58, 0.5); } 50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(166, 103, 58, 0.8); } 100% { transform: scale(1); box-shadow: 0 0 10px rgba(166, 103, 58, 0.5); } }
         
+        /* ألوان التنبيهات المنبثقة */
         div:where(.swal2-container) div:where(.swal2-popup) {
-            background: #1a1a1a !important; border: 1px solid #d4af37 !important; color: #fff !important;
+            background: #0f0a07 !important; border: 1px solid #a6673a !important; color: #d1bfae !important;
         }
     </style>
 </head>
@@ -165,7 +168,7 @@
         
         <p class="hint-text">تلميح: الباسورد هو يوم عيد ميلادي أنا (رقمين) 😉🎂</p>
         
-        <p id="error-msg" style="color: #ff4d4d; margin-top: 15px; display: none;">Wrong Password!</p>
+        <p id="error-msg" style="color: #8b3a3a; margin-top: 15px; display: none;">Wrong Password!</p>
 
         <button class="music-fix-btn" onclick="forcePlayMusic()">
             [ 🔇 اضغطي هنا لو الصوت مش شغال ]
@@ -174,8 +177,8 @@
 
     <div class="container" id="main-content">
         
-        <h1 style="color: var(--primary-color); margin-bottom: 20px; font-size: 2rem; text-shadow: 0 0 10px #d4af37;">
-            ✨ Queen Sanoosa ✨
+        <h1 style="color: var(--primary-color); margin-bottom: 20px; font-size: 2rem; text-shadow: 0 0 15px rgba(166, 103, 58, 0.8);">
+            🤎 Queen Sanoosa 🤎
         </h1>
 
         <div class="photos-wrapper">
@@ -185,7 +188,7 @@
             </div>
             <div class="photo-card">
                 <img src="img2.jpg" alt="Photo 2">
-                <p class="caption">أطيب قلب عرفته 🤍</p>
+                <p class="caption">أطيب قلب عرفته 🤎</p>
             </div>
         </div>
 
@@ -195,7 +198,7 @@
             <div class="time-unit"><span class="time-val" id="minutes">00</span><span class="time-label">Mins</span></div>
             <div class="time-unit"><span class="time-val" id="seconds">00</span><span class="time-label">Secs</span></div>
         </div>
-        <p style="text-align: center; margin-top: -20px; margin-bottom: 20px; color: #888; font-size: 0.9rem;">
+        <p style="text-align: center; margin-top: -20px; margin-bottom: 20px; color: #7a6352; font-size: 0.9rem;">
             عداد الأيام الحلوة من يوم ما عرفتك ⏳
         </p>
 
@@ -216,7 +219,7 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn btn-yes" onclick="celebrate()">وأنا كمان بحبك ❤️</button>
+            <button class="btn btn-yes" onclick="celebrate()">وأنا كمان بحبك 🤎</button>
             <button class="btn btn-no" id="no-btn" onmouseover="moveButton()" onclick="moveButton()">مخصماك 🏃‍♀️</button>
         </div>
 
@@ -263,7 +266,8 @@
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
-        const emojis = ['💍', '🤍', '✨', '🎉', '🎂'];
+        // تم تعديل الإيموجيز لتتناسب مع الثيم البني
+        const emojis = ['🤎', '🍂', '✨', '🧸', '☕'];
 
         function launchConfetti() {
             particles = [];
@@ -297,7 +301,6 @@
 
             if (e.key === 'Enter' || this.value === correctPass) {
                 if (this.value === correctPass) {
-                    // إخفاء شاشة الدخول وإظهار المحتوى بدون أي رسائل منبثقة
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-content').style.display = 'block';
                     launchConfetti(); 
@@ -323,11 +326,11 @@
         function celebrate() {
             launchConfetti();
             Swal.fire({
-                title: 'وأنا بموت فيكي! ❤️',
+                title: 'وأنا بموت فيكي! 🤎',
                 text: 'ربنا يخليكي ليا يا أجمل سنوسة في الدنيا ✨',
                 icon: 'success',
                 confirmButtonText: 'حاضر',
-                background: '#1a1a1a', color: '#fff', confirmButtonColor: '#d4af37'
+                background: '#0f0a07', color: '#d1bfae', confirmButtonColor: '#a6673a'
             });
         }
     </script>
