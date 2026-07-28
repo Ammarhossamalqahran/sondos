@@ -163,7 +163,7 @@
         
         <input type="password" id="password" class="input-box" placeholder="اكتبي الباسورد" autofocus>
         
-        <p class="hint-text">تلميح: الباسورد هو يوم عيد ميلادك (رقمين) 😉🎂</p>
+        <p class="hint-text">تلميح: الباسورد هو يوم عيد ميلادي أنا (رقمين) 😉🎂</p>
         
         <p id="error-msg" style="color: #ff4d4d; margin-top: 15px; display: none;">Wrong Password!</p>
 
@@ -241,8 +241,9 @@
             });
         }
 
-        // --- 1. Timer Logic (September 1, 2024) ---
-        const startDate = new Date("September 1, 2024 00:00:00").getTime(); 
+        // --- 1. Timer Logic (May 28, 2026) ---
+        // تم التعديل لتكون المدة شهرين بالضبط
+        const startDate = new Date("May 28, 2026 00:00:00").getTime(); 
 
         setInterval(function() {
             const now = new Date().getTime();
@@ -292,8 +293,8 @@
 
         passwordInput.addEventListener('keyup', function(e) {
             
-            // 🔴 الباسورد هنا: 17
-            const correctPass = '17'; 
+            // 🔴 الباسورد هنا: 10
+            const correctPass = '10'; 
 
             if (e.key === 'Enter' || this.value === correctPass) {
                 if (this.value === correctPass) {
