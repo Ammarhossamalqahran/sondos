@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manoosh's Special Day</title>
+    <title>Sanoosa's Special Day</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
@@ -120,10 +120,10 @@
             border: 1px solid var(--primary-color); border-radius: 20px;
             padding: 20px; margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-height: 300px; overflow-y: auto; text-align: center;
+            max-height: 400px; overflow-y: auto; text-align: center;
         }
         .message-box h2 { color: var(--primary-color); margin-bottom: 15px; }
-        .message-box p { line-height: 1.8; color: #e0e0e0; margin-bottom: 10px; }
+        .message-box p { line-height: 1.8; color: #e0e0e0; margin-bottom: 10px; font-size: 1.05rem; }
 
         .timer-box {
             background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px;
@@ -175,7 +175,7 @@
     <div class="container" id="main-content">
         
         <h1 style="color: var(--primary-color); margin-bottom: 20px; font-size: 2rem; text-shadow: 0 0 10px #d4af37;">
-            ✨ Queen Manoosh ✨
+            ✨ Queen Sanoosa ✨
         </h1>
 
         <div class="photos-wrapper">
@@ -202,19 +202,22 @@
         <div class="message-box">
             <h2>💌 رسالة من القلب</h2>
             <div id="typed-text">
-                <p>يا أغلى منووش في الدنيا..</p>
-                <p>ألف مليون مبروك مقدماً يا "أختي" الغالية، وربنا يتمملك على خير ويفرح قلبك.</p>
-                <p>عايز أقولك إنك بجد شخصية نادرة، وتستاهلي كل حاجة حلوة في الدنيا.</p>
-                <p>ربنا يسعدك، ويبعد عنك أي شر، ويجعل أيامك كلها أعياد وفرح.</p>
-                <p>وطبعاً مش محتاج أقولك.. العريس ده محظوظ جداً إنه فاز بيكي! 😉</p>
+                <p>يا أغلى وأحن "سنوسة" في الدنيا..</p>
+                <p>مش عارف أبدأ منين، بس حابب أشكرك من كل قلبي على وقفتك جنبي واهتمامك بيا في أكتر وقت كنت ضعيف فيه. إنتي كنتي السند اللي قواني، والنور اللي نورلي طريقي.</p>
+                <p>أنا بجد بحبك، وحبك بيكبر في قلبي كل يوم. ربنا يخليكي ليا وميحرمنيش من حنيتك وقلبك الأبيض أبداً.</p>
                 <br>
-                <p style="font-weight: bold; color: var(--primary-color);">(Cyber Brother)</p>
+                <p style="color: var(--primary-color); font-weight: bold; line-height: 2;">
+                    يا نورَ أيامي ومَأمنَ خافقي .. يا مَن بلمستِها يَزولُ شقائي<br>
+                    أفديكِ بالروحِ التي أَحيَيتِها .. يا حُبَّ عُمري يا دواءَ دائِي
+                </p>
+                <br>
+                <p style="font-weight: bold; color: var(--primary-color);">(عمار)</p>
             </div>
         </div>
 
         <div class="btn-group">
-            <button class="btn btn-yes" onclick="celebrate()">آمين يارب 🤲</button>
-            <button class="btn btn-no" id="no-btn" onmouseover="moveButton()" onclick="moveButton()">مش هعزمك 🏃‍♀️</button>
+            <button class="btn btn-yes" onclick="celebrate()">وأنا كمان بحبك ❤️</button>
+            <button class="btn btn-no" id="no-btn" onmouseover="moveButton()" onclick="moveButton()">مخصماك 🏃‍♀️</button>
         </div>
 
     </div>
@@ -222,7 +225,7 @@
     <script>
         // --- 0. Start Experience ---
         function startExperience() {
-            forcePlayMusic(); // محاولة التشغيل عند الضغط
+            forcePlayMusic(); 
             document.getElementById('start-overlay').style.display = 'none';
             document.getElementById('login-screen').style.display = 'flex';
         }
@@ -235,7 +238,6 @@
                 console.log("Music started");
             }).catch(e => {
                 console.log("Audio failed:", e);
-                // لو فشل ممكن نظهر تنبيه خفيف (اختياري)
             });
         }
 
@@ -301,7 +303,7 @@
                     
                     Swal.fire({
                         title: 'Happy Birthday! 🎂',
-                        text: 'Welcome Agent Manoosh..',
+                        text: 'Welcome Sanoosa..',
                         timer: 2000,
                         timerProgressBar: true,
                         showConfirmButton: false,
@@ -318,7 +320,7 @@
 
         // --- 4. Prank Button ---
         const btn = document.getElementById('no-btn');
-        const phrases = ["مش هتلحقيني 😜", "إنسي 😂", "بعيدة أوي 🐢", "مش النهاردة 🏃‍♀️"];
+        const phrases = ["مش هتلحقيني 😜", "إنسي 😂", "بعيدة أوي 🐢", "بحبك غصب عنك 🏃‍♀️"];
         function moveButton() {
             btn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
             const x = Math.random() * (window.innerWidth - 150);
@@ -329,8 +331,8 @@
         function celebrate() {
             launchConfetti();
             Swal.fire({
-                title: 'مبروووك! 💍',
-                text: 'ربنا يفرح قلبك دايماً.. ومستني دعوة الفرح! 😉',
+                title: 'وأنا بموت فيكي! ❤️',
+                text: 'ربنا يخليكي ليا يا أجمل سنوسة في الدنيا ✨',
                 icon: 'success',
                 confirmButtonText: 'حاضر',
                 background: '#1a1a1a', color: '#fff', confirmButtonColor: '#d4af37'
