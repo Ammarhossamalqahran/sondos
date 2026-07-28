@@ -242,7 +242,6 @@
         }
 
         // --- 1. Timer Logic (May 28, 2026) ---
-        // تم التعديل لتكون المدة شهرين بالضبط
         const startDate = new Date("May 28, 2026 00:00:00").getTime(); 
 
         setInterval(function() {
@@ -298,18 +297,10 @@
 
             if (e.key === 'Enter' || this.value === correctPass) {
                 if (this.value === correctPass) {
+                    // إخفاء شاشة الدخول وإظهار المحتوى بدون أي رسائل منبثقة
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-content').style.display = 'block';
                     launchConfetti(); 
-                    
-                    Swal.fire({
-                        title: 'Happy Birthday! 🎂',
-                        text: 'Welcome Sanoosa..',
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                        background: '#1a1a1a', color: '#fff'
-                    });
                 } else {
                     if (this.value.length >= 2) {
                         document.getElementById('error-msg').style.display = 'block';
