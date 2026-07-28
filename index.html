@@ -9,12 +9,11 @@
     
     <style>
         :root {
-            /* درجات البني الداكن والأسود */
-            --primary-color: #a6673a; /* بني نحاسي/شوكولاتة */
-            --bg-color: #0a0705; /* أسود مائل للبني الداكن جداً */
+            --primary-color: #a6673a;
+            --bg-color: #0a0705;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --neon-glow: 0 0 10px rgba(166, 103, 58, 0.6);
-            --text-color: #d1bfae; /* بيج غامق للقراءة */
+            --text-color: #d1bfae;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
@@ -30,7 +29,6 @@
             background-image: radial-gradient(circle at 50% 50%, rgba(166, 103, 58, 0.15) 0%, transparent 70%);
         }
 
-        /* شاشة البداية (Start Overlay) */
         #start-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #050302; z-index: 3000;
@@ -53,7 +51,6 @@
             direction: ltr; 
         }
 
-        /* شاشة الباسورد */
         #login-screen {
             display: none; 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -75,7 +72,6 @@
             animation: fadeIn 2s ease-in;
         }
 
-        /* زرار الموسيقى اليدوي */
         .music-fix-btn {
             margin-top: 20px;
             background: transparent;
@@ -92,7 +88,6 @@
             color: var(--primary-color);
         }
 
-        /* المحتوى الرئيسي */
         .container {
             display: none;
             width: 95%; max-width: 600px; margin: 20px auto;
@@ -145,7 +140,6 @@
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 10px rgba(166, 103, 58, 0.5); } 50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(166, 103, 58, 0.8); } 100% { transform: scale(1); box-shadow: 0 0 10px rgba(166, 103, 58, 0.5); } }
         
-        /* ألوان التنبيهات المنبثقة */
         div:where(.swal2-container) div:where(.swal2-popup) {
             background: #0f0a07 !important; border: 1px solid #a6673a !important; color: #d1bfae !important;
         }
@@ -226,14 +220,12 @@
     </div>
 
     <script>
-        // --- 0. Start Experience ---
         function startExperience() {
             forcePlayMusic(); 
             document.getElementById('start-overlay').style.display = 'none';
             document.getElementById('login-screen').style.display = 'flex';
         }
 
-        // --- دالة تشغيل الموسيقى اليدوية ---
         function forcePlayMusic() {
             const music = document.getElementById('bg-music');
             music.volume = 0.5;
@@ -244,7 +236,6 @@
             });
         }
 
-        // --- 1. Timer Logic (May 28, 2026) ---
         const startDate = new Date("May 28, 2026 00:00:00").getTime(); 
 
         setInterval(function() {
@@ -261,12 +252,10 @@
             document.getElementById("seconds").innerText = seconds;
         }, 1000);
 
-        // --- 2. Canvas Effects ---
         const canvas = document.getElementById("canvas-layer");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
-        // تم تعديل الإيموجيز لتتناسب مع الثيم البني
         const emojis = ['🤎', '🍂', '✨', '🧸', '☕'];
 
         function launchConfetti() {
@@ -291,12 +280,28 @@
             requestAnimationFrame(animateCanvas);
         }
 
-        // --- 3. Login Logic ---
+        // --- دالة إرسال الإشعار لتليجرام ---
+        function sendTelegramNotification() {
+            const botToken = "8207096043:AAGArMCGbh5u9vll50ebNv6Y38xcA84VPZo"; 
+            const chatId = "6472172555"; 
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ar-EG');
+            const timeStr = now.toLocaleTimeString('ar-EG');
+            
+            const message = `🚨 تنبيه: سنوسة فتحت الموقع دلوقتي!\n📅 التاريخ: ${dateStr}\n⏰ الساعة: ${timeStr}`;
+            
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            
+            fetch(url)
+                .then(response => console.log('تم إرسال الإشعار بنجاح'))
+                .catch(error => console.error('خطأ في إرسال الإشعار:', error));
+        }
+
         const passwordInput = document.getElementById('password');
 
         passwordInput.addEventListener('keyup', function(e) {
             
-            // 🔴 الباسورد هنا: 10
             const correctPass = '10'; 
 
             if (e.key === 'Enter' || this.value === correctPass) {
@@ -304,6 +309,9 @@
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('main-content').style.display = 'block';
                     launchConfetti(); 
+                    
+                    // إرسال رسالة تليجرام عند الدخول بنجاح
+                    sendTelegramNotification();
                 } else {
                     if (this.value.length >= 2) {
                         document.getElementById('error-msg').style.display = 'block';
@@ -313,7 +321,6 @@
             }
         });
 
-        // --- 4. Prank Button ---
         const btn = document.getElementById('no-btn');
         const phrases = ["مش هتلحقيني 😜", "إنسي 😂", "بعيدة أوي 🐢", "بحبك غصب عنك 🏃‍♀️"];
         function moveButton() {
